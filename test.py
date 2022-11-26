@@ -23,12 +23,4 @@ plt.rcParams["figure.figsize"] = (10,8)
 
 plt.bar([1,2,3,4,5],[1,2,3,4,5])
 
-#plt.show()
-
-fb_df = pd.read_csv("clean.csv")
-
-print(fb_df["Month"])
-print(fb_df["TotalInteract"])
-
-fig = px.bar(fb_df, y="TotalInteract")
-fig.show()
+plt.show()
