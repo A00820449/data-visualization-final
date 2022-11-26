@@ -41,7 +41,7 @@ app.layout = html.Div(children=[
     Input(component_id='slct_group', component_property='value')
 )
 def update_graph(option_slctd):
-    print(option_slctd)
+    print("Option selected:", option_slctd)
 
     ddf = pysqldf("""
     SELECT {0}, SUM(TotalInteract) as "TotalInteract"
