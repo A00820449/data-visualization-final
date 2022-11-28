@@ -1,13 +1,32 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap');
 
 * {
     box-sizing: border-box;
 }
 body {
-    background: white;
-    font-family: 'Roboto', sans-serif;
+    background: #EDCDB5;
+    color: #746257;
+    font-family: 'Abril Fatface', cursive;
+}
+a, .nav-link {
+    color: #746257;
 }
 
-.dropdown {
+.dropdowns {
+    display: flex;
+    gap: 30px
+}
+.dropdowns > * {
     width: min(400px, 90vw);
+}
+
+.logo {
+    display: block;
+    width: 400px;
+    margin: 0 auto;
+    border-radius: 10px;
+}
+
+.title {
+    text-align: center;
 }
