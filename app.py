@@ -193,7 +193,7 @@ accordion = collapse = html.Div(
         ),
         dbc.Collapse(
             [
-                html.H2("$$$Title$$$"),
+                html.H3("$$$Title$$$"),
                 html.P("$$$DESC$$$"),
                 sun_graph
             ],
