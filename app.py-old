@@ -44,7 +44,7 @@ data1 = go.Bar(
 
 data = [data0, data1]
 
-layout = go.Layout(title="Posts patrocinados", barmode="stack", colorway=(colors))
+layout = go.Layout(title="$$$graphtitle$$$", barmode="stack", colorway=(colors))
 
 ana_fig2 = go.Figure(data = data, layout = layout)
 
@@ -85,8 +85,8 @@ ana_fig3 = px.pie(adf4, names='Type', values='EngagedUsers', color_discrete_sequ
 ana_tab1 = dbc.Card(
     dbc.CardBody(
         [   
-            html.H3("Interacciones por publicidad pagada vs no pagada "),
-            html.P("La diferencia de inteacciones por usuarios en publicidades pagadas y no pagadas", className="card-text"),
+            html.H3("$$$TITLE3$$$"),
+            html.P("$$$DESC$$$", className="card-text"),
             dcc.Graph(figure=ana_fig1),
         ]
     )
@@ -95,8 +95,8 @@ ana_tab1 = dbc.Card(
 ana_tab2 = dbc.Card(
     dbc.CardBody(
         [   
-            html.H3("Gráfica de barras de publicidad"),
-            html.P("Comparación del alcance e interacción de los posts.", className="card-text"),
+            html.H3("$$$TITLE4$$$"),
+            html.P("$$$DESC$$$", className="card-text"),
             dcc.Graph(figure=ana_fig2),
         ]
     )
@@ -105,8 +105,8 @@ ana_tab2 = dbc.Card(
 ana_tab3 = dbc.Card(
     dbc.CardBody(
         [   
-            html.H3("Tipo de publicación"),
-            html.P("Publicaciones que reciben más interacción", className="card-text"),
+            html.H3("$$$TITLE5$$$"),
+            html.P("$$$DESC$$$", className="card-text"),
             dcc.Graph(figure=ana_fig3),
         ]
     )
@@ -114,9 +114,9 @@ ana_tab3 = dbc.Card(
 
 ana_tabs = dbc.Tabs(
     [
-        dbc.Tab(ana_tab1, label="Publicidad 1"),
-        dbc.Tab(ana_tab2, label="Publicidad 2"),
-        dbc.Tab(ana_tab3, label="Contenido"),
+        dbc.Tab(ana_tab1, label="$$$TAB$$$"),
+        dbc.Tab(ana_tab2, label="$$$TAB$$$"),
+        dbc.Tab(ana_tab3, label="$$$TAB$$$"),
     ]
 )
 
@@ -185,7 +185,7 @@ sun_graph = dcc.Graph(figure=sun_fig)
 accordion = collapse = html.Div(
     [
         dbc.Button(
-            "Open sunburst",
+            "$$$OPEN$$$",
             id="collapse-button",
             className="mb-3",
             color="dark",
@@ -193,8 +193,8 @@ accordion = collapse = html.Div(
         ),
         dbc.Collapse(
             [
-                html.H3("Desglose de interacciones"),
-                html.P("En esta métrica podemos observar la cantid de interacciones por usuarios segmentada por categoría de post y typo de publicación"),
+                html.H3("$$$TITLE 6$$$"),
+                html.P("$$$DESC$$$"),
                 sun_graph
             ],
             id="collapse",
@@ -205,12 +205,12 @@ accordion = collapse = html.Div(
 ################
 
 graph_1 = html.Div([
-    html.H2(["Timeline de interacciones"]),
-    html.P(["Esta línea del tiempo representa el conteo de interacciones en diversas métricas de interacción por post y de tiempo."]),
+    html.H2(["$$$TITLE 1$$$"]),
+    html.P(["$$$DESC 1$$$"]),
 
     html.Div(className="dropdowns" , children=[
         html.Div([
-            "Timeline group by: ",
+            "Group by: ",
             dcc.Dropdown(id="slct_group",
                  options=["Month", "Weekday", "Hour"],
                  multi=False,
@@ -222,7 +222,7 @@ graph_1 = html.Div([
             ]),
 
         html.Div([
-            "Select interaction: ",
+            "Select: ",
             dcc.Dropdown(id="slct_unit",
                  options=[{"label": "Total", "value": "TotalInteract"}, {"label": "Likes", "value": "like"}, {"label": "Shares", "value": "share"}, {"label": "Comments", "value": "comment"}],
                  multi=False,
@@ -242,9 +242,9 @@ graph_1 = html.Div([
 ])
 
 graph_2 = html.Div([
-    html.H2(["Timeline de seguidores"]),
+    html.H2(["$$$TITLE 2$$$"]),
     
-    html.P(["Descripción de las interacciones por parte de los seguidres de la página."]),
+    html.P(["$$$DESC 2$$$"]),
 
     html.Div(className="dropdowns" , children=[
         html.Div([
@@ -269,24 +269,24 @@ graph_2 = html.Div([
 
 graph_tabs = dbc.Tabs(
     [
-        dbc.Tab(graph_1, label="Timeline General"),
-        dbc.Tab(graph_2, label="Timeline Seguidores"),
+        dbc.Tab(graph_1, label="$$$TAB 1$$$"),
+        dbc.Tab(graph_2, label="$$$TAB 2$$$"),
     ]
 )
 
 logo = html.Img(src=app.get_asset_url("img/logo.jpg"), className="logo")
 
 app.layout = html.Div(className="container", children=[
-    html.H1(className="title",children=[logo, 'Análisis de interacciones']),
-    html.P(className="subtitle",children=["Basandose en la métrica de interacciones a posts de la página de Facebook de Peach con el motivo de identificar los factores para atraer nuevos usuarios."]),
+    html.H1(className="title",children=[logo, '$$$TITLE$$$']),
+    html.P(className="subtitle",children=["$$$DESC$$$"]),
     
     graph_tabs,
 
-    html.H2(["Publicidades pagadas"]),
+    html.H2(["$$$HEADER 1$$$"]),
 
     ana_tabs,
     
-    html.H2(["Interacciones por categorías"]),
+    html.H2(["$$$HEADER 2$$$"]),
     accordion
 
 ])
