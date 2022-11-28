@@ -1,7 +1,7 @@
 # Run this app with `python app.py` and
 # visit http://127.0.0.1:8050/ in your web browser.
 
-from dash import Dash, html, dcc, Input, Output
+from dash import Dash, html, dcc, Input, Output, State
 import plotly.express as px
 import plotly.graph_objects as go
 import pandas as pd
@@ -44,7 +44,7 @@ data1 = go.Bar(
 
 data = [data0, data1]
 
-layout = go.Layout(title = 'Publicidad pagada', barmode="stack", colorway=(colors))
+layout = go.Layout(barmode="stack", colorway=(colors))
 
 ana_fig2 = go.Figure(data = data, layout = layout)
 
@@ -84,8 +84,9 @@ ana_fig3 = px.pie(adf4, names='Type', values='EngagedUsers', color_discrete_sequ
 
 ana_tab1 = dbc.Card(
     dbc.CardBody(
-        [
-            html.P("This is tab 1!", className="card-text"),
+        [   
+            html.H3("$$$TITLE$$$"),
+            html.P("$$$DESC$$$", className="card-text"),
             dcc.Graph(figure=ana_fig1),
         ]
     )
@@ -93,8 +94,9 @@ ana_tab1 = dbc.Card(
 
 ana_tab2 = dbc.Card(
     dbc.CardBody(
-        [
-            html.P("This is tab 2!", className="card-text"),
+        [   
+            html.H3("$$$TITLE$$$"),
+            html.P("$$$DESC$$$", className="card-text"),
             dcc.Graph(figure=ana_fig2),
         ]
     )
@@ -102,8 +104,9 @@ ana_tab2 = dbc.Card(
 
 ana_tab3 = dbc.Card(
     dbc.CardBody(
-        [
-            html.P("This is tab 3!", className="card-text"),
+        [   
+            html.H3("$$$TITLE$$$"),
+            html.P("$$$DESC$$$", className="card-text"),
             dcc.Graph(figure=ana_fig3),
         ]
     )
@@ -111,9 +114,9 @@ ana_tab3 = dbc.Card(
 
 ana_tabs = dbc.Tabs(
     [
-        dbc.Tab(ana_tab1, label="Tab 1"),
-        dbc.Tab(ana_tab2, label="Tab 2"),
-        dbc.Tab(ana_tab3, label="Tab 3"),
+        dbc.Tab(ana_tab1, label="$$$TAB$$$"),
+        dbc.Tab(ana_tab2, label="$$$TAB$$$"),
+        dbc.Tab(ana_tab3, label="$$$TAB$$$"),
     ]
 )
 
@@ -160,14 +163,50 @@ ydf2[['Type','Category','Impressions','EngagedUsers%']]
 yfig = px.sunburst(ydf2, path=["Category", "Type"], values="Impressions", color_discrete_sequence=colors)
 yfig = yfig.update_traces(textinfo="label+percent parent")
 
-print(ydf2["Category"])
-
 ygraph = dcc.Graph(figure=yfig)
 
 ### Yuyu Fin ##
 
+### Sunburst ###
+ydf3_1 = ydf3[['Category', 'Type','EngagedNew','EngagedFollowers']] 
+sun_mat = []
+for i, row in ydf3_1.iterrows():
+    new_row = [row["Type"], row["Category"], row["EngagedNew"], "New"]
+    fol_row = [row["Type"], row["Category"], row["EngagedFollowers"], "Follower"]
+    sun_mat.append(new_row)
+    sun_mat.append(fol_row)
+
+sun_df = pd.DataFrame(sun_mat, columns=["Type", "Category", "Engaged", "Follower"])
+    
+sun_fig = px.sunburst(sun_df, path=["Category", "Type", "Follower"], values="Engaged", color_discrete_sequence=colors)
+sun_fig = sun_fig.update_traces(textinfo="label+percent parent")
+sun_graph = dcc.Graph(figure=sun_fig)
+
+accordion = collapse = html.Div(
+    [
+        dbc.Button(
+            "$$$OPEN$$$",
+            id="collapse-button",
+            className="mb-3",
+            color="dark",
+            n_clicks=0,
+        ),
+        dbc.Collapse(
+            [
+                html.H2("$$$Title$$$"),
+                html.P("$$$DESC$$$"),
+                sun_graph
+            ],
+            id="collapse",
+            is_open=False,
+        ),
+    ]
+)
+################
+
 graph_1 = html.Div([
-    html.H2(["Interactions"]),
+    html.H2(["$$$TITLE 1$$$"]),
+    html.P(["$$$DESC 1$$$"]),
 
     html.Div(className="dropdowns" , children=[
         html.Div([
@@ -203,7 +242,9 @@ graph_1 = html.Div([
 ])
 
 graph_2 = html.Div([
-    html.H2(["Followers"]),
+    html.H2(["$$$TITLE 2$$$"]),
+    
+    html.P(["$$$DESC 2$$$"]),
 
     html.Div(className="dropdowns" , children=[
         html.Div([
@@ -228,22 +269,26 @@ graph_2 = html.Div([
 
 graph_tabs = dbc.Tabs(
     [
-        dbc.Tab(graph_1, label="Tab 1"),
-        dbc.Tab(graph_2, label="Tab 2"),
+        dbc.Tab(graph_1, label="$$$TAB 1$$$"),
+        dbc.Tab(graph_2, label="$$$TAB 2$$$"),
     ]
 )
 
 logo = html.Img(src=app.get_asset_url("img/logo.jpg"), className="logo")
 
 app.layout = html.Div(className="container", children=[
-    html.H1(className="title",children=[logo, 'Final Project']),
+    html.H1(className="title",children=[logo, '$$$TITLE$$$']),
+    html.P(className="subtitle",children=["$$$DESC$$$"]),
     
     graph_tabs,
 
-    html.H2(["Ana Paula"]),
+    html.H2(["$$$HEADER 1$$$"]),
 
     ana_tabs,
-    ygraph
+    
+    html.H2(["$$$HEADER 2$$$"]),
+    accordion
+
 ])
 
 @app.callback(
@@ -293,6 +338,16 @@ def update_graph2(option_slctd):
     fig = fig.update_layout({"paper_bgcolor": "rgba(0,0,0,0)", "plot_bgcolor": "#F7F6F6"})
 
     return fig    
+
+@app.callback(
+    Output("collapse", "is_open"),
+    [Input("collapse-button", "n_clicks")],
+    [State("collapse", "is_open")],
+)
+def toggle_collapse(n, is_open):
+    if n:
+        return not is_open
+    return is_open
 
 if __name__ == '__main__':
     app.run_server(debug=True)

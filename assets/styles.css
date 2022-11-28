@@ -27,6 +27,6 @@ a, .nav-link {
     border-radius: 10px;
 }
 
-.title {
+.title, .subtitle {
     text-align: center;
 }
