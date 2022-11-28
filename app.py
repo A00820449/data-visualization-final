@@ -44,7 +44,7 @@ data1 = go.Bar(
 
 data = [data0, data1]
 
-layout = go.Layout(title="$$$title$$", barmode="stack", colorway=(colors))
+layout = go.Layout(title="$$$graphtitle$$$", barmode="stack", colorway=(colors))
 
 ana_fig2 = go.Figure(data = data, layout = layout)
 
@@ -85,7 +85,7 @@ ana_fig3 = px.pie(adf4, names='Type', values='EngagedUsers', color_discrete_sequ
 ana_tab1 = dbc.Card(
     dbc.CardBody(
         [   
-            html.H3("$$$TITLE$$$"),
+            html.H3("$$$TITLE3$$$"),
             html.P("$$$DESC$$$", className="card-text"),
             dcc.Graph(figure=ana_fig1),
         ]
@@ -95,7 +95,7 @@ ana_tab1 = dbc.Card(
 ana_tab2 = dbc.Card(
     dbc.CardBody(
         [   
-            html.H3("$$$TITLE$$$"),
+            html.H3("$$$TITLE4$$$"),
             html.P("$$$DESC$$$", className="card-text"),
             dcc.Graph(figure=ana_fig2),
         ]
@@ -105,7 +105,7 @@ ana_tab2 = dbc.Card(
 ana_tab3 = dbc.Card(
     dbc.CardBody(
         [   
-            html.H3("$$$TITLE$$$"),
+            html.H3("$$$TITLE5$$$"),
             html.P("$$$DESC$$$", className="card-text"),
             dcc.Graph(figure=ana_fig3),
         ]
@@ -193,7 +193,7 @@ accordion = collapse = html.Div(
         ),
         dbc.Collapse(
             [
-                html.H3("$$$Title$$$"),
+                html.H3("$$$TITLE 6$$$"),
                 html.P("$$$DESC$$$"),
                 sun_graph
             ],
