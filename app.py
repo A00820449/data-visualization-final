@@ -44,7 +44,7 @@ data1 = go.Bar(
 
 data = [data0, data1]
 
-layout = go.Layout(barmode="stack", colorway=(colors))
+layout = go.Layout(title="$$$title$$", barmode="stack", colorway=(colors))
 
 ana_fig2 = go.Figure(data = data, layout = layout)
 
