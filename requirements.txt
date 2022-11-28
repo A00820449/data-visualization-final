@@ -1,0 +1,6 @@
+dash==2.3.1
+dash_bootstrap_components==1.0.0
+matplotlib==3.6.2
+pandas==1.5.1
+pandasql==0.7.3
+plotly==5.11.0
